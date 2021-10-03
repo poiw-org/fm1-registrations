@@ -1,0 +1,57 @@
+Arguments: 
+  /home/donfn/.nvm/versions/node/v16.6.2/bin/node /home/donfn/.nvm/versions/node/v16.6.2/bin/yarn add -D svelte-bootstrap-icons
+
+PATH: 
+  /home/donfn/.deta/bin:/home/donfn/Repos/poiw-org/fm1-registrations/node_modules/.bin:/home/donfn/.deta/bin:/home/donfn/.nvm/versions/node/v16.6.2/bin:/home/donfn/.local/bin:/home/donfn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+
+Yarn version: 
+  1.22.15
+
+Node version: 
+  16.6.2
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile '/home/donfn/.cache/yarn/v6/npm-glob-parent-6.0.2-6d237d99083950c79290f24c7642a3de9a28f9e3-integrity/node_modules/glob-parent/index.js' -> '/home/donfn/Repos/poiw-org/fm1-registrations/node_modules/tailwindcss/node_modules/glob-parent/index.js'
+
+npm manifest: 
+  {
+  	"name": "~TODO~",
+  	"version": "0.0.1",
+  	"scripts": {
+  		"dev": "svelte-kit dev",
+  		"build": "svelte-kit build",
+  		"preview": "svelte-kit preview",
+  		"check": "svelte-check --tsconfig ./tsconfig.json",
+  		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch"
+  	},
+  	"devDependencies": {
+  		"@sveltejs/adapter-static": "^1.0.0-next.20",
+  		"@sveltejs/kit": "next",
+  		"autoprefixer": "^10.3.1",
+  		"cssnano": "^5.0.6",
+  		"postcss": "^8.3.5",
+  		"postcss-load-config": "^3.1.0",
+  		"svelte": "^3.34.0",
+  		"svelte-check": "^2.0.0",
+  		"svelte-preprocess": "^4.7.4",
+  		"tailwindcss": "^2.2.9",
+  		"tslib": "^2.0.0",
+  		"typescript": "^4.0.0"
+  	},
+  	"type": "module",
+  	"dependencies": {
+  		"axios": "^0.21.4",
+  		"firebase": "^9.0.0",
+  		"firebaseui": "^5.0.0",
+  		"svelte-loading-spinners": "^0.1.7"
+  	}
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
