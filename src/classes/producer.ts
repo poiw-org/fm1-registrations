@@ -149,7 +149,9 @@ export default class Producer{
             .then(()=>{
                 if(err) return;
                 self.applicationStatus = ApplicationStates.PENDING_REVIEW
-                alert("Η αίτηση σου ανέβηκε! Θα εξεταστεί από τη ροή του FM1 και θα λάβεις τηλεφώνημα ή email για την εξέλιξή της. Μπορείς να υποβάλεις εκ νέου τη φόρμα για να τροποποιήσεις την αίτηση.")
+                if(confirm("Η αίτησή σου ανέβηκε! θες να κλείσεις τώρα το ραντεβού για το δοκιμαστικό σου;")){
+                    window.schedule();
+                }
             })
     }
 

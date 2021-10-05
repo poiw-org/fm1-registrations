@@ -2,7 +2,7 @@
     <div class="px-10 xl:px-20 py-10 flex flex-col justify-between w-full xl:w-1/2 ">
         <Logo />
         <div class="flex flex-col">
-            {#if authentication !== AuthenticationStates.PROCESSING && producer.applicationStatus !== ApplicationStates.PROCESSING  }
+            {#if authentication !== AuthenticationStates.PROCESSING && applicationStatus !== ApplicationStates.PROCESSING  }
                 {#if authentication === AuthenticationStates.LOGGED_OUT}
                     <span class="flex items-center gap-4 text-sm text-gray-600 tracking-wider"><PersonCircle/> ΚΑΤΑΧΩΡΙΣΗ EMAIL</span>
                     <p class="mt-8 max-w-xl ">Βάλε το email που χρησιμοποιείς περισσότερο (όχι υποχρεωτικά το ακαδημαϊκό). Θα σου στείλουμε ένα κωδικό για να επιβεβαιώσουμε ότι σου ανήκει.</p>
@@ -26,8 +26,12 @@
                 {:else if authentication === AuthenticationStates.LOGGED_IN}
                     <span class="flex mb-10">
                     {#if producer.previousApplication}
-                        <span class="flex items-center gap-4 text-gray-600 tracking-widest"><BoxArrowUp/>ΕΠΕΞΕΡΓΑΣΙΑ ΑΙΤΗΣΗΣ</span>
-                        {:else}
+                        <span class="flex flex-col gap-5">
+                            <span class="flex items-center gap-4 text-gray-600 tracking-widest"><BoxArrowUp/>ΕΠΕΞΕΡΓΑΣΙΑ ΑΙΤΗΣΗΣ</span>
+                            <a href="" class="p-4 bg-green-500 text-center text-white rounded" on:click={schedule}>ΡΑΝΤΕΒΟΥ</a>
+                        </span>
+
+                    {:else}
                         <span class="flex items-center gap-4 text-gray-600 tracking-widest"><PencilSquare/>ΥΠΟΒΟΛΗ ΑΙΤΗΣΗΣ </span>
                     {/if}
 
@@ -120,12 +124,7 @@
     let loaded = false;
     let authentication: AuthenticationStates = AuthenticationStates.PROCESSING;
     let producer: Producer;
-
-    let load = new Promise(resolve => {
-        window.onload = () => {
-            resolve()
-        }
-    })
+    let applicationStatus: ApplicationStates;
 
     onMount(async function(){
         producer = new Producer();
@@ -133,8 +132,22 @@
         // authentication = producer.getAuthentication();
         setInterval(async function(){
             authentication = producer.getAuthentication();
+            applicationStatus = producer.applicationStatus
         }, 100)
     })
+
+    let schedule = () => {
+        window.Calendly.initPopupWidget({
+            url: 'https://calendly.com/studiofm1?background_color=489f48&primary_color=ffde59',
+            prefill: {
+                name: producer.fullName,
+                email: producer.email,
+                location: 123
+            }
+        })
+    }
+
+    window.schedule = schedule;
 
     let login = async (event) => {
         event.preventDefault();
@@ -152,10 +165,13 @@
         event.preventDefault();
         if(producer.previousApplication) if(!confirm("Έχεις ήδη υποβάλει μια αίτηση. Αν την ξανα-υποβάλεις, η παλιά θα διαγραφεί και θα πρέπει να επανεξεταστεί από τη ροή. Θέλεις να συνεχίσεις;")) return;
         await producer.apply();
+        applicationStatus = producer.applicationStatus;
     }
 
 </script>
 <svelte:head>
     <title>Αίτηση υποψήφιων παραγωγών STUDIO FM1</title>
 <!--    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>-->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </svelte:head>
